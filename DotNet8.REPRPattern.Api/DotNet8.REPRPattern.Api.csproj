@@ -18,7 +18,6 @@
     <Folder Include="Features\Blog\CreateBlog\" />
     <Folder Include="Features\Blog\DeleteBlog\" />
     <Folder Include="Features\Blog\UpdateBlog\" />
-    <Folder Include="Features\PageSetting\" />
   </ItemGroup>
 
 </Project>

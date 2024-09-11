@@ -1,5 +1,6 @@
 ﻿using DotNet8.REPRPattern.Api.Db;
 using DotNet8.REPRPattern.Api.Entities;
+using DotNet8.REPRPattern.Api.Extensions;
 using DotNet8.REPRPattern.Api.Features.PageSetting;
 using MediatR;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -21,7 +22,7 @@ namespace DotNet8.REPRPattern.Api.Features.Blog.GetBlogList
             Result<GetBlogListDTO> result;
             try
             {
-                var lst = _context.Tbl_Blogs.OrderByDescending(x => x.BlogId).AsQueryable();
+                var lst = _context.Tbl_Blogs.OrderByDescending(x => x.BlogId).Paginate(request.PageNo, request.PageSize);
                 var totalCount = await lst.CountAsync(cancellationToken);
                 var pageCount = totalCount / request.PageSize;
 

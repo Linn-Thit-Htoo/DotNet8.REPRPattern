@@ -1,18 +1,14 @@
-﻿using DotNet8.REPRPattern.Api.Entities;
-using DotNet8.REPRPattern.Api.Features.Blog.CreateBlog;
+﻿namespace DotNet8.REPRPattern.Api.Extensions;
 
-namespace DotNet8.REPRPattern.Api.Extensions
+public static class Extension
 {
-    public static class Extension
+    public static Tbl_Blog ToEntity(this CreateBlogRequestDTO createBlogRequest)
     {
-        public static Tbl_Blog ToEntity(this CreateBlogRequestDTO createBlogRequest)
+        return new Tbl_Blog
         {
-            return new Tbl_Blog
-            {
-                BlogTitle = createBlogRequest.BlogTitle,
-                BlogAuthor = createBlogRequest.BlogAuthor,
-                BlogContent = createBlogRequest.BlogContent,
-            };
-        }
+            BlogTitle = createBlogRequest.BlogTitle,
+            BlogAuthor = createBlogRequest.BlogAuthor,
+            BlogContent = createBlogRequest.BlogContent,
+        };
     }
 }

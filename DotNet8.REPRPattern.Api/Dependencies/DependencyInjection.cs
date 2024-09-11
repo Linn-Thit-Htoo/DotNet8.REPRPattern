@@ -1,6 +1,6 @@
 ﻿using DotNet8.REPRPattern.Api.Db;
 using DotNet8.REPRPattern.Api.Extensions;
-using DotNet8.REPRPattern.Api.Features.Blog.CreateBlog;
+using DotNet8.REPRPattern.Api.Features.Blog;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -33,7 +33,7 @@ namespace DotNet8.REPRPattern.Api.Dependencies
 
         private static IServiceCollection AddValidatorService(this IServiceCollection services)
         {
-            return services.AddScoped<CreateBlogValidator>();
+            return services.AddScoped<BlogValidator>();
         }
     }
 }

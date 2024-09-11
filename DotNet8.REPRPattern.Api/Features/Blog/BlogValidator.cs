@@ -1,10 +1,11 @@
-﻿using FluentValidation;
+﻿using DotNet8.REPRPattern.Api.Features.Blog.CreateBlog;
+using FluentValidation;
 
-namespace DotNet8.REPRPattern.Api.Features.Blog.CreateBlog
+namespace DotNet8.REPRPattern.Api.Features.Blog
 {
-    public class CreateBlogValidator : AbstractValidator<CreateBlogRequestDTO>
+    public class BlogValidator : AbstractValidator<CreateBlogRequestDTO>
     {
-        public CreateBlogValidator()
+        public BlogValidator()
         {
             RuleFor(x => x.BlogTitle).NotEmpty().WithMessage("Blog Title cannot be empty.")
                 .NotNull().WithMessage("Blog Title cannot be null.");

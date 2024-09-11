@@ -9,12 +9,12 @@ namespace DotNet8.REPRPattern.Api.Features.Blog.CreateBlog
     public class CreateBlogCommandHandler : IRequestHandler<CreateBlogCommand, Result<Tbl_Blog>>
     {
         private readonly AppDbContext _context;
-        private readonly CreateBlogValidator _createBlogValidator;
+        private readonly BlogValidator _blogValidator;
 
-        public CreateBlogCommandHandler(AppDbContext context, CreateBlogValidator createBlogValidator)
+        public CreateBlogCommandHandler(AppDbContext context, BlogValidator createBlogValidator)
         {
             _context = context;
-            _createBlogValidator = createBlogValidator;
+            _blogValidator = createBlogValidator;
         }
 
         public async Task<Result<Tbl_Blog>> Handle(CreateBlogCommand request, CancellationToken cancellationToken)
@@ -22,7 +22,7 @@ namespace DotNet8.REPRPattern.Api.Features.Blog.CreateBlog
             Result<Tbl_Blog> result;
             try
             {
-                var validationResult = await _createBlogValidator.ValidateAsync(request.CreateBlogRequest, cancellationToken);
+                var validationResult = await _blogValidator.ValidateAsync(request.CreateBlogRequest, cancellationToken);
                 if (!validationResult.IsValid)
                 {
                     string errors = string.Join(" ", validationResult.Errors.Select(x => x.ErrorMessage));

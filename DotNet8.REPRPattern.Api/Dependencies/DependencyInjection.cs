@@ -1,6 +1,8 @@
 ﻿using DotNet8.REPRPattern.Api.Db;
 using DotNet8.REPRPattern.Api.Extensions;
+using DotNet8.REPRPattern.Api.Features.Blog.CreateBlog;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace DotNet8.REPRPattern.Api.Dependencies
 {
@@ -8,7 +10,7 @@ namespace DotNet8.REPRPattern.Api.Dependencies
     {
         public static IServiceCollection AddDependencyInjection(this IServiceCollection services, WebApplicationBuilder builder)
         {
-            return services.AddDbContextService(builder).AddMediatRService();
+            return services.AddDbContextService(builder).AddMediatRService().AddValidatorService();
         }
 
         private static IServiceCollection AddDbContextService(this  IServiceCollection services, WebApplicationBuilder builder)
@@ -27,6 +29,11 @@ namespace DotNet8.REPRPattern.Api.Dependencies
             return services.AddMediatR(cf =>
                 cf.RegisterServicesFromAssembly(typeof(Extension).Assembly)
             );
+        }
+
+        private static IServiceCollection AddValidatorService(this IServiceCollection services)
+        {
+            return services.AddScoped<CreateBlogValidator>();
         }
     }
 }

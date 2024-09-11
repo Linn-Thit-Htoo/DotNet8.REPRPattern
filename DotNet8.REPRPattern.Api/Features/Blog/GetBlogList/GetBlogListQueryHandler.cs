@@ -1,6 +1,50 @@
-﻿namespace DotNet8.REPRPattern.Api.Features.Blog.GetBlogList
+﻿using DotNet8.REPRPattern.Api.Db;
+using DotNet8.REPRPattern.Api.Entities;
+using DotNet8.REPRPattern.Api.Features.PageSetting;
+using MediatR;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
+
+namespace DotNet8.REPRPattern.Api.Features.Blog.GetBlogList
 {
-    public class GetBlogListQueryHandler
+    public class GetBlogListQueryHandler : IRequestHandler<GetBlogListQuery, Result<GetBlogListDTO>>
     {
+        private readonly AppDbContext _context;
+
+        public GetBlogListQueryHandler(AppDbContext context)
+        {
+            _context = context;
+        }
+
+        public async Task<Result<GetBlogListDTO>> Handle(GetBlogListQuery request, CancellationToken cancellationToken)
+        {
+            Result<GetBlogListDTO> result;
+            try
+            {
+                var lst = _context.Tbl_Blogs.OrderByDescending(x => x.BlogId).AsQueryable();
+                var totalCount = await lst.CountAsync(cancellationToken);
+                var pageCount = totalCount / request.PageSize;
+
+                if (totalCount % request.PageSize > 0)
+                {
+                    pageCount++;
+                }
+
+                var model = new GetBlogListDTO()
+                {
+                    Blogs = lst,
+                    PageSetting = new PageSettingDTO(request.PageNo, request.PageSize, pageCount, totalCount)
+                };
+
+                result = Result<GetBlogListDTO>.Success(model);
+            }
+            catch (Exception ex)
+            {
+                result = Result<GetBlogListDTO>.Fail(ex);
+            }
+
+        result:
+            return result;
+        }
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace DotNet8.REPRPattern.Api.Extensions
+﻿using DotNet8.REPRPattern.Api.Entities;
+
+namespace DotNet8.REPRPattern.Api.Extensions
 {
-    public class Extension
+    public static class Extension
     {
     }
 }

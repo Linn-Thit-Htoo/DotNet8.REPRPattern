@@ -8,3 +8,4 @@ global using System.ComponentModel.DataAnnotations;
 global using System.ComponentModel.DataAnnotations.Schema;
 global using Newtonsoft.Json;
 global using DotNet8.REPRPattern.Api.Features.Blog.CreateBlog;
+global using DotNet8.REPRPattern.Api.Dependencies;

@@ -15,7 +15,7 @@ namespace DotNet8.REPRPattern.Api.Features.Blog.UpdateBlog
             _mediator = mediator;
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBlog([FromBody] UpdateBlogRequestDTO updateBlogRequest, int id, CancellationToken cancellationToken)
         {
             var command = new UpdateBlogCommand(updateBlogRequest, id);

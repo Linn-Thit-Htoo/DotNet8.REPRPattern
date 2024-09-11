@@ -15,7 +15,7 @@ namespace DotNet8.REPRPattern.Api.Features.Blog.DeleteBlog
             _mediator = mediator;
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBlog(int id, CancellationToken cancellationToken)
         {
             var command = new DeleteBlogCommand(id);

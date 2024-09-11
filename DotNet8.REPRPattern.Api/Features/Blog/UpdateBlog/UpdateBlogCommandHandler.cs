@@ -20,7 +20,7 @@ namespace DotNet8.REPRPattern.Api.Features.Blog.UpdateBlog
             Result<Tbl_Blog> result;
             try
             {
-                var blog = await _context.Tbl_Blogs.FindAsync(new object?[] { request.BlogId, cancellationToken }, cancellationToken: cancellationToken);
+                var blog = await _context.Tbl_Blogs.FindAsync([request.BlogId, cancellationToken], cancellationToken: cancellationToken);
                 if (blog is null)
                 {
                     result = Result<Tbl_Blog>.NotFound();

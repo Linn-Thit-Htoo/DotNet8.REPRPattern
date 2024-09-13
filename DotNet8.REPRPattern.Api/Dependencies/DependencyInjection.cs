@@ -31,7 +31,7 @@ public static class DependencyInjection
     private static IServiceCollection AddMediatRService(this IServiceCollection services)
     {
         return services.AddMediatR(cf =>
-            cf.RegisterServicesFromAssembly(typeof(Extension).Assembly)
+            cf.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly)
         );
     }
 
